@@ -9,8 +9,15 @@
 // getEmailDomain("t.mellink@novi.nl") geeft novi.nl
 // getEmailDomain("a.wiersma@outlook.com") geeft outlook.com
 
+function getEmailDomain(email) {
+    const atSign = email.indexOf('@')
+    const output = email.substring(atSign)
+    return output
+}
 
-
+console.log(getEmailDomain("n.eeken@novi-education.nl"))
+console.log(getEmailDomain("t.mellink@novi.nl"))
+console.log(getEmailDomain("a.wiersma@outlook.com"))
 
 /* Opdracht  2 */
 // Schrijf een functie genaamd typeOfEmail, die een emailadres verwacht. De functie checkt of het emailadres een novi domein heeft (medewerker), een novi-education domein (student), of extern domein (zoals gmail of outlook)
@@ -20,6 +27,26 @@
 // typeOfEmail("novi.nlaapjesk@outlook.com") geeft geeft "Extern" <-- deze moet het ook doen!
 // typeOfEmail("a.wiersma@outlook.com") geeft "Extern"
 
+function  typeOfEmail(email) {
+    const atSign = email.indexOf('@')
+    const emailType = email.substring(atSign)
+    const output = []
+
+    if (emailType === '@novi-education.nl') {
+        output.push('Student')
+    } else if (emailType === '@novi.nl') {
+        output.push('Medewerker')
+    } else {output.push('Extern') }
+
+    return output
+}
+
+
+
+console.log(typeOfEmail("n.eeken@novi-education.nl"))
+console.log(typeOfEmail("t.mellink@novi.nl"))
+console.log(typeOfEmail("novi.nlaapjesk@outlook.com"))
+console.log(typeOfEmail("a.wiersma@outlook.com"))
 
 
 /* Opdracht  3 */
@@ -34,3 +61,31 @@
 // checkEmailValidity("n.eekenanovi.nl") geeft false - want geen @
 // checkEmailValidity("n.eeken@novinl.") geeft false - want de punt mag niet als laatst
 // checkEmailValidity("tessmellink@novi,nl") geeft false - want er staat een komma in
+
+console.log('OPDRACHT 3')
+function  checkEmailValidity(email) {
+    let atSign = email.includes('@')
+    let pointSign = email.endsWith('.')
+    let commaSign = email.includes(',')
+    let output = []
+
+    if ((atSign === true) && (pointSign === false) && (commaSign === false)) {
+        output.push('true')
+        } else { output.push('false')
+    }
+
+    return output
+}
+
+console.log(checkEmailValidity("n.eeken@novi.nl"))
+console.log(checkEmailValidity("tessmellink@novi.nl"))
+console.log(checkEmailValidity("n.eekenanovi.nl"))
+console.log(checkEmailValidity("n.eeken@novinl."))
+console.log(checkEmailValidity("tessmellink@novi,nl"))
+    console.log('WILDCARD')
+console.log(checkEmailValidity('Markenden@hotmail.com')) //true//
+console.log(checkEmailValidity('mark.vandenenden@vanmoof.com')) //true//
+console.log(checkEmailValidity('mark,vandenenden@vanmoof.com')) //false//
+console.log(checkEmailValidity('markendenhotmail.com')) //false//
+console.log(checkEmailValidity('markenden@hotmailcom.'))//false//
+console.log(checkEmailValidity('false as hell')) //false//
